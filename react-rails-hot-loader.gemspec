@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "em-websocket"
   spec.add_runtime_dependency "rails"
   spec.add_runtime_dependency "react-rails"
+  spec.add_runtime_dependency "coffee-rails"
 
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "codeclimate-test-reporter"

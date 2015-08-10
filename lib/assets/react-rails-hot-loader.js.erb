@@ -1,6 +1,9 @@
+//= require react-rails-hot-loader-configs
+//= require reconnecting-websocket.min
+
 var ReactRailsHotLoader = {
   since: null,
-  port: 8082,
+  port: window.react_hot_loader_port || 8082,
   host: window.location.hostname,
   shouldLog: true,
 
@@ -8,7 +11,7 @@ var ReactRailsHotLoader = {
     this._resetSince()
     var wsURL = "ws://" + this.host + ":" + this.port
     this.log("connecting to " + wsURL)
-    this._socket = new WebSocket(wsURL)
+    this._socket = new ReconnectingWebSocket(wsURL)
 
     var _this = this
 
@@ -33,8 +36,8 @@ var ReactRailsHotLoader = {
     this._interval = setInterval(function() {
       if (_this._socket.readyState == WebSocket.OPEN) {
         _this._socket.send(_this.since)
-      } else {
-        _this.log("WebSocket not ready, readyState: " + _this._socket.readyState)
+      } else if (_this._socket.readyState == WebSocket.CLOSE) {
+        _this.log("WebSocket not ready, wating...")
       }
     }, 1500)
   },

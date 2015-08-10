@@ -2,6 +2,8 @@ module React
   module Rails
     module HotLoader
       mattr_accessor :server
+      mattr_accessor :path
+      mattr_accessor :port
 
       # Create a new server with `options` & start it
       def self.start(options={})
